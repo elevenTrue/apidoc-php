@@ -185,6 +185,10 @@ class ParseApiDetail
             foreach ($mergeParams as $item) {
                 if (!empty($item['main']) && $item['main'] === true){
                     $item['children'] = $returned;
+                    if (!empty($returned[0]['name']) && $returned[0]['name'] == 'Apidoc-List') {
+                        $item['type'] = 'array';
+                        $item['children'] = $returned[0]['children'];
+                    }
                 }
                 $item['desc'] = Lang::getLang($item['desc']);
                 if (!empty($item['md'])){
@@ -194,7 +198,6 @@ class ParseApiDetail
             }
             return $resData;
         }
-        return $returned;
 
     }
 
